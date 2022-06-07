@@ -1,0 +1,35 @@
+service: app
+
+provider:
+    name: aws
+    region: eu-west-1
+    runtime: provided.al2
+    apiGateway:
+        binaryMediaTypes:
+            - '*/*'
+    environment:
+        BREF_BINARY_RESPONSES: '1'
+        #Be aware that the max upload and download size is 6MB. For larger files, use AWS S3. An
+
+plugins:
+    - ./vendor/bref/bref
+
+functions:
+    api:
+        handler: index.php
+        description: ''
+        timeout: 28 # in seconds (API Gateway has a timeout of 29 seconds)
+        layers:
+            - ${bref:layer.php-74-fpm}
+        events:
+            -   httpApi: '*'
+            -   schedule:
+                    rate: rate(5 minutes)
+                    input:
+                        warmer: true
+
+# Exclude files from deployment
+package:
+    patterns:
+        - '!node_modules/**'
+        - '!tests/**'
