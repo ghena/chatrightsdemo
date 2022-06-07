@@ -110,7 +110,6 @@ export default class CaptureImage extends React.Component {
         return (
             <NativeBaseProvider>
                 <View style={{flex:1,width:'100%'}}>
-
                     <View style={{
                         flex:1,
                         width:'100%',
