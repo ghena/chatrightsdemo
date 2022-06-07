@@ -38,7 +38,6 @@ export default class CaptureImage extends React.Component {
       
             const json = await response.json();
             return json;
-           // Auth.signOut()
 
         } catch (error) {
 
@@ -123,11 +122,9 @@ export default class CaptureImage extends React.Component {
                     }}>
                         <TouchableOpacity onPress={() => this._takePic()}><Text style={{fontSize:18,textAlign:'center'}}>Clicca qui per scannerizzare il tuo documento</Text></TouchableOpacity>
                     </View>
-                    
                 </View>
             </NativeBaseProvider>
         )
-         
     }
     
     render() {
